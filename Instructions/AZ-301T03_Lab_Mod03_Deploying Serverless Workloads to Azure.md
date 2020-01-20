@@ -72,47 +72,49 @@ lab:
 
 1. 在门户网站底部的 **Cloud Shell** 在命令提示符中，输入以下命令并按 **Enter** 键以创建一个变量，该值指定了你将在本练习中使用的资源组名称：
 
-    ```sh
+```sh
     RESOURCE_GROUP_APP='AADesignLab0502-RG'
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键创建一个变量，该值指定了将用于部署的 Azure 区域（在提示时输入区域名称）：
 
-    ```sh
+```sh
     read -p 'Region: ' LOCATION
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以创建资源组：
 
-    ```sh
+```sh
     az group create --name $RESOURCE_GROUP_APP --location $LOCATION
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以创建新的应用服务计划：
 
-    ```sh
+```sh
     az appservice plan create --is-linux --name "AADesignLab0502-$LOCATION" --resource-group $RESOURCE_GROUP_APP --location $LOCATION --sku B2
-    ```
+```
 
+    > **注意**：如果命令失败并显示消息 *“Linux 辅助角色在资源组 AADesignLab0502-RG 中不可用”。使用以下链接来了解详细信息：https://go.microsoft.com/fwlink/?linkid=831180"*，删除资源组，将 **“位置”** 设置为 **“eastus”**，然后再次执行前面两个步骤。
+    
 #### 任务 4：创建 Web 应用程序实例
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以查看基于 Linux 的应用服务 Web 应用程序实例的可能运行时列表： 
 
-    ```sh
-    az webapp list-runtimes --linux
-    ``` 
+```sh
+    az webapp list-runtimes --linux --output tsv
+``` 
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以创建一个新变量，该值是随机生成的字符串，你将用它作为新 Web 应用程序的名称：
 
-    ```sh
+```sh
     WEBAPPNAME1=webapp05021$RANDOM$RANDOM
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以使用唯一名称创建新 Web 应用程序：
 
-    ```sh
+```sh
     az webapp create --name $WEBAPPNAME1 --plan AADesignLab0502-$LOCATION --resource-group $RESOURCE_GROUP_APP --runtime "DOTNETCORE|2.1"
-    ```
+```
 
     > **注**：如果命令因 Web 应用程序名称重复而失败，请重新运行最后两个步骤，直到命令成功完成
 
@@ -143,27 +145,27 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以创建一个变量，该值指定了你将在本练习中使用的资源组名称：
 
-    ```sh
+```sh
     RESOURCE_GROUP_APP='AADesignLab0502-RG'
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键创建一个变量，该值指定了将用于部署的 Azure 区域：
 
-    ```sh
+```sh
     LOCATION=$(az group list --query "[?name == 'AADesignLab0502-RG'].location" --output tsv)
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以创建一个新变量，该值是随机生成的字符串，你将用它作为新 Web 应用程序的名称：
 
-    ```sh
+```sh
     WEBAPPNAME2=webapp05022$RANDOM$RANDOM
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以使用唯一名称创建新 Web 应用程序：
 
-    ```sh
+```sh
     az webapp create --name $WEBAPPNAME2 --plan AADesignLab0502-$LOCATION --resource-group $RESOURCE_GROUP_APP --runtime "NODE|9.4"
-    ```
+```
 
     > **注**：如果命令因 Web 应用程序名称重复而失败，请重新运行最后两个步骤，直到命令成功完成
 
@@ -172,7 +174,7 @@ lab:
 
 1. 在 **打开** 对话框中，导航到 **\\allfiles\\AZ-301T03\\Module_03\\Labfiles\\Starter\\** 文件夹，选择 **github.json** 文件，然后单击 **打开**。该文件中包含以下 Azure 资源管理器模板：
 
-    ```json
+```json
     {
         "$schema": "http://schemas.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
         "contentVersion": "1.0.0.0",
@@ -190,14 +192,14 @@ lab:
         },
         "resources": [
             {
-                "apiVersion": "2015/8/1",
+                "apiVersion": "2015-08-01",
                 "type": "Microsoft.Web/sites",
                 "name": "[parameters('webAppName')]",
                 "location": "[resourceGroup().location]",
                 "properties": {},
                 "resources": [
                     {
-                        "apiVersion": "2015/8/1",
+                        "apiVersion": "2015-08-01",
                         "name": "web",
                         "type": "sourcecontrols",
                         "dependsOn": [
@@ -213,13 +215,13 @@ lab:
             }
         ]
     }
-    ```
+```
 
 1. 在 **Cloud Shell** 窗格中，单击 **上传/下载文件** 图标，然后在下拉菜单中单击 **上传**。 
 
 1. 在 **打开** 对话框中，导航到 **\\allfiles\\AZ-301T03\\Module_03\\Labfiles\\Starter\\** 文件夹，选择 **parameters.json** 文件，然后单击 **打开**。该文件中包含你先前上传的 Azure 资源管理器模板的以下参数：
 
-    ```json
+```json
     {
       "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
       "contentVersion": "1.0.0.0",
@@ -235,45 +237,45 @@ lab:
         }
       }
     }
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以创建一个变量，该值指定了托管 Web 应用程序代码的 GitHub 存储库名称：
 
-    ```sh
+```sh
     REPOSITORY_URL='https://github.com/Azure-Samples/nodejs-docs-hello-world'
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键创建一个变量，该值指定了托管 Web 应用程序代码的 GitHub 存储库名称，并考虑了 URL 可能包含的任何特殊字符：
 
-    ```sh
+```sh
     REPOSITORY_URL_REGEX="$(echo $REPOSITORY_URL | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')"
-    ```
+```
 
     > **注**：这是必要的操作，因为你将使用 **SED** 实用程序将此字符串插入 Azure 资源管理器模板参数文件。或者，你只需打开文件并直接在文件中输入 URL 字符串即可。
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以使用参数文件中的 **$WEBAPPNAME2** 变量值替换 **webAppName** 参数值的占位符：
 
-    ```sh
+```sh
     sed -i.bak1 's/"$WEBAPPNAME2"/"'"$WEBAPPNAME2"'"/' ~/parameters.json
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以使用参数文件中的 **$REPOSITORY_URL** 变量值替换 **repositoryUrl** 参数值的占位符：
 
-    ```sh
+```sh
     sed -i.bak2 's/"$REPOSITORY_URL"/"'"$REPOSITORY_URL_REGEX"'"/' ~/parameters.json
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以验证是否已成功替换参数文件中的占位符：
 
-    ```sh
+```sh
     cat ~/parameters.json
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以通过使用本地 Azure 资源管理器模板和本地参数文件来部署在 GitHub 中驻留的 Web 应用程序代码：
 
-    ```sh
+```sh
     az group deployment create --resource-group $RESOURCE_GROUP_APP --template-file github.json --parameters @parameters.json
-    ```
+```
 
 1. 在继续执行下一个任务之前，请等待部署完成。
 
@@ -297,27 +299,27 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以创建一个变量，该值指定了你将在此任务中使用的资源组名称：
 
-    ```sh
+```sh
     RESOURCE_GROUP_CONTAINER='AADesignLab0502-RG'
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键创建一个变量，该值指定了将用于部署的 Azure 区域：
 
-    ```sh
+```sh
     LOCATION=$(az group list --query "[?name == 'AADesignLab0502-RG'].location" --output tsv)
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以创建一个新变量，该值是随机生成的字符串，你将用它作为新 Web 应用程序的名称：
 
-    ```sh
+```sh
     WEBAPPNAME3=webapp05023$RANDOM$RANDOM
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以使用唯一名称创建新 Web 应用程序：
 
-    ```sh
+```sh
     az webapp create --name $WEBAPPNAME3 --plan AADesignLab0502-$LOCATION --resource-group $RESOURCE_GROUP_CONTAINER --deployment-container-image ghost
-    ```
+```
 
     > **注**：如果命令因 Web 应用程序名称重复而失败，请重新运行最后两个步骤，直到命令成功完成
 
@@ -421,9 +423,9 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以列出你在本实验中创建的所有资源组：
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab05')]".name --output tsv
-    ```
+```
 
 1. 验证输出是否仅包含你在本实验室中创建的资源组。这些组将在下一个任务中删除。
 
@@ -431,9 +433,9 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符中输入以下命令并按 **Enter** 键以删除你在本实验室中创建的资源组
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab05')]".name --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'
-    ```
+```
 
 1. 关闭门户网站的底部的 **Cloud Shell** 提示符。
 

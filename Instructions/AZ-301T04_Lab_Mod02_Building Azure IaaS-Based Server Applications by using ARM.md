@@ -46,11 +46,11 @@ lab:
 
 1. 在 Azure 门户的左上角，单击 **创建资源**。
 
-2. 在 **新建** 边栏选项卡的顶部，在 **搜索市场** 文本框中输入 **Windows Server 2016** 并按 **Enter 键**。
+1. 在 **“新建”** 边栏选项卡顶部的 **“搜索市场”** 文本框中，输入 **“Windows Server”** 并按 Enter。
 
-3. 在 **全部** 边栏选项卡上，在搜索结果中，单击 **Windows Server 2016 数据中心**。
+1. 在 **“所有内容”** 边栏选项卡的搜索结果中，单击 **“Windows Server”**。
 
-4. 在 **Windows Server 2016 数据中心** 边栏选项卡上，单击 **创建** 按钮。
+1. 在 **“Windows Server”** 边栏选项卡上，选择 **“[smalldisk] Windows Server 2016 数据中心”** 软件计划，然后单击 **“创建”** 按钮。
 
 5. 在 **基础** 选项卡上，执行以下任务：
 
@@ -233,7 +233,7 @@ lab:
 11. 在出现的 **Blob 属性** 弹出窗口中，找到并记录 **URL** 属性的值。 此 URL 稍后将在本实验室中使用。
 
 
-#### 任务 6: 使用 Azure 资源管理器模板和 PowerShell DSC 扩展，从 Azure 门户部署 Azure VM。
+#### 任务 6：使用 Azure 资源管理器模板和 PowerShell DSC 扩展，从 Azure 门户部署 Azure VM。
 
 1. 在 Azure 门户的左上角，单击 **创建资源**。
 
@@ -249,7 +249,7 @@ lab:
 
 7. 在 **选择需要上传的文件** 对话框中，导航到 **\\allfiles\\AZ-301T04\\Module_02\\LabFiles\\Starter\\** 文件夹，选择 **dsc-extension-template.json** 文件，然后单击 **打开**。 这样就可以将以下内容加载到模板编辑器窗格中：
 
-    ```json
+```json
     {
         "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
         "contentVersion": "1.0.0.0",
@@ -289,7 +289,7 @@ lab:
             }
         ]
     }
-    ```
+```
 
 8. 单击 **保存** 按钮保存模板。
 
@@ -368,7 +368,7 @@ lab:
 
 6. 在 **编辑模板** 边栏选项卡上，单击 **加载文件**。
 
-7. 在出现的 **打开** 文件对话框中，导航到 **F:\\Labfiles\\Mod03\\Starter** 文件夹。
+7. 在出现的 **“打开”** 文件对话框中，导航到 **“\\allfiles\\AZ-301T04\\Module_02\\LabFiles\\Starter\\”** 文件夹。
 
 8. 选择 **vmss-template.json** 文件。
 
@@ -438,7 +438,7 @@ lab:
 
     - 在 **Cloud Shell 区域** 下拉列表中，选择与你打算在本实验室中部署资源的位置匹配或接近的 Azure 区域。
 
-    - 在 **资源组** 部分，确保选中 **创建新的** 选项，然后在文本框中输入 **AADesignLab0303-RG**。
+    - 在 **“资源组”** 部分，确保已选中 **“使用现有”** 选项，然后选择 **“AADesignLab0301-RG”**。
 
     - 在 **存储账户** 部分，确保选中 **创建新的** 选项，然后在下方文本框中输入由 3 到 24 个字符和数字组成的唯一名称。 
 
@@ -453,41 +453,41 @@ lab:
 
 1. 在门户底部的 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，创建本地目录以安装 Azure 构建块 npm 包：
 
-    ```sh
+```sh
     mkdir ~/.npm-global
-    ```
+```
 
 2. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，更新 npm 配置，将新的本地目录包含在内：
 
-    ```sh
+```sh
     npm config set prefix '~/.npm-global'
-    ```
+```
 
 3. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，打开 ~./bashrc 配置文件进行编辑：
 
-    ```sh
+```sh
     vi ~/.bashrc
-    ```
+```
 
 4. 在 **Cloud Shell**命令提示符处，在 vi 编辑器界面中，向下滚动到文件的底部（或输入 **G**），向右滚动到最后一行的最右侧字符（或输入 **$**）输入 **a** 进入 **插入** 模式，按 **Enter 键** 换行，然后输入以下内容将新创建的目录添加到系统路径：
 
-    ```sh
+```sh
     export PATH="$HOME/.npm-global/bin:$PATH"
-    ```
+```
 
 5. 在 **Cloud Shell** 命令提示符处，在 vi 编辑器界面中，按 **Esc**，再按 **：**，输入 **wq!** 并按 **Enter 键**，保存更改并关闭文件。
 
 6. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，安装 Azure 构建块 npm 包：
 
-    ```sh
+```sh
     npm install -g @mspnp/azure-building-blocks
-    ```
+```
 
 7. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，退出 shell：
 
-    ```sh
+```sh
     exit
-    ```
+```
 
 8. 在 **Cloud Shell 超时** 窗格中，单击 **重新连接**。 
 
@@ -498,59 +498,64 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，下载包含 Azure 构建块参考架构文件的 GitHub 存储库：
 
-    ```
+```
     git clone https://github.com/mspnp/reference-architectures.git
-    ```
+```
 
 2.  在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，查看将用于此部署的 Azure 构建块参数文件的内容：
 
-    ```sh
+```sh
     cat ./reference-architectures/virtual-machines/single-vm/parameters/windows/single-vm.json
-    ```
+```
 
 3. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，创建一个变量，其值用于指定 Azure 订阅的名称：
 
-    ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
-    ```
+```sh
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
+```
 
 4. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，创建一个变量，其值用于指定你先前在本练习中创建的资源组的名称：
 
-    ```sh
+```sh
     RESOURCE_GROUP='AADesignLab0303-RG'
-    ```
+```
 
 5. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，创建一个变量，其值用于指定将用于部署的 Azure 区域：
 
-    ```sh
+```sh
     LOCATION=$(az group list --query "[?name == 'AADesignLab0301-RG'].location" --output tsv)
-    ```
+```
 
-6. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，将 **adminUsername** 参数的占位符替换为构建块参数文件中的值 **Student**：
+6. 在 **Cloud Shell** 命令提示符中，输入以下命令并按 **Enter** 以创建用于部署的资源组：
+```sh
+    az group create --name $RESOURCE_GROUP --location $LOCATION
+```
 
-    ```sh
+7. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，将 **adminUsername** 参数的占位符替换为构建块参数文件中的值 **Student**：
+
+```sh
     sed -i.bak1 's/"adminUsername": ""/"adminUsername": "Student"/' ./reference-architectures/virtual-machines/single-vm/parameters/windows/single-vm.json
-    ```
+```
 
-7. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，将 **adminPassword** 参数的占位符替换为构建块参数文件中的值 **Pa55w.rd1234**：
+8. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，将 **adminPassword** 参数的占位符替换为构建块参数文件中的值 **Pa55w.rd1234**：
 
-    ```sh
+```sh
     sed -i.bak2 's/"adminPassword": ""/"adminPassword": "Pa55w.rd1234"/' ./reference-architectures/virtual-machines/single-vm/parameters/windows/single-vm.json
-    ```
+```
 
-8. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，验证参数值在构建块参数文件中是否修改成功：
+9. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，验证参数值在构建块参数文件中是否修改成功：
 
-    ```sh
+```sh
     cat ./reference-architectures/virtual-machines/single-vm/parameters/windows/single-vm.json
-    ```
+```
 
-9. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，使用 Azure 构建块部署 Windows Server 2016 Azure VM：
+10. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，使用 Azure 构建块部署 Windows Server 2016 Azure VM：
 
-    ```sh
+```sh
     azbb -g $RESOURCE_GROUP -s $SUBSCRIPTION_ID -l $LOCATION -p ./reference-architectures/virtual-machines/single-vm/parameters/windows/single-vm.json --deploy
-    ```
+```
 
-10. 请等待部署完成，再执行下一个任务。
+11. 请等待部署完成，再执行下一个任务。
 
 
 #### 任务 4: 验证 Windows Server 2016 Azure VM 是否正在为 Web 内容提供服务
@@ -574,15 +579,15 @@ lab:
 
 1.  在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，查看将用于此部署的 Azure 构建块参数文件的内容：
 
-    ```sh
+```sh
     cat ./reference-architectures/virtual-machines/single-vm/parameters/linux/single-vm.json
-    ```
+```
 
 2. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，生成用于在访问 Linux VM 时进行身份验证的 SSH 密钥对：
 
-    ```sh
+```sh
     ssh-keygen -t rsa -b 2048
-    ```
+```
 
     - 当提示输入要将密钥保存在其中的文件时，按 **Enter 键** 接受默认值 **(~/.ssh/id_rsa)**。
 
@@ -590,65 +595,65 @@ lab:
 
 3. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，创建一个变量，其值用于指定新生成的密钥对的公钥：
 
-    ```sh
+```sh
     PUBLIC_KEY=$(cat ~/.ssh/id_rsa.pub)
-    ```
+```
 
 4. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，创建一个变量，其值用于指定新生成的密钥对的公钥，其中考虑了公钥可能包含的任何特殊字符：
 
-    ```sh
+```sh
     PUBLIC_KEY_REGEX="$(echo $PUBLIC_KEY | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')"
-    ```
+```
 
     > **注**: 因为你将使用 **sed** 实用程序将此字符串插入 Azure 构建块参数文件中，所以必需这么做。 或者，你只需打开文件并直接在文件中输入公钥字符串即可。
 
 5. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，创建一个变量，其值用于指定 Azure 订阅的名称：
 
-    ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
-    ```
+```sh
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
+```
 
 6. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，创建一个变量，其值用于指定将用于部署的资源组的名称：
 
-    ```sh
+```sh
     RESOURCE_GROUP='AADesignLab0304-RG'
-    ```
+```
 
 7. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，创建一个变量，其值用于指定将用于部署的 Azure 区域：
 
-    ```sh
+```sh
     LOCATION=$(az group list --query "[?name == 'AADesignLab0301-RG'].location" --output tsv)
-    ```
+```
 
 8. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，将 **adminUsername** 参数的占位符替换为构建块参数文件中的值 **Student**：
 
-    ```sh
+```sh
     sed -i.bak1 's/"adminUsername": ""/"adminUsername": "Student"/' ./reference-architectures/virtual-machines/single-vm/parameters/linux/single-vm.json
-    ```
+```
 
 9. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，将 **sshPublicKey** 参数的占位符替换为构建块参数文件中的 **$PUBLIC_KEY_REGEX** 变量：
 
-    ```sh
+```sh
     sed -i.bak2 's/"sshPublicKey": ""/"sshPublicKey": "'"$PUBLIC_KEY_REGEX"'"/' ./reference-architectures/virtual-machines/single-vm/parameters/linux/single-vm.json
-    ```
+```
 
 10. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，验证参数值在构建块参数文件中是否修改成功：
 
-    ```sh
+```sh
     cat ./reference-architectures/virtual-machines/single-vm/parameters/linux/single-vm.json
-    ```
+```
 
 11. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，创建新资源组：
 
-    ```sh
+```sh
     az group create --name $RESOURCE_GROUP --location $LOCATION
-    ```
+```
 
 12. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，使用 Azure 构建块部署 Linux Azure VM：
 
-    ```sh
+```sh
     azbb -g $RESOURCE_GROUP -s $SUBSCRIPTION_ID -l $LOCATION -p ./reference-architectures/virtual-machines/single-vm/parameters/linux/single-vm.json --deploy
-    ```
+```
 
 13. 请等待部署完成，再执行下一个任务。
 
@@ -682,9 +687,9 @@ lab:
 
 2. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，列出你在本实验室中创建的所有资源组：
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab03')]".name --output tsv
-    ```
+```
 
 3. 验证输出结果中是否仅包含你在本实验室中创建的资源组。 这些组将在下一个任务中删除。
 
@@ -692,9 +697,9 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，删除在本实验室中创建的资源组
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab03')]".name --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'
-    ```
+```
 
 2. 关闭门户底部的 **Cloud Shell** 提示。
 

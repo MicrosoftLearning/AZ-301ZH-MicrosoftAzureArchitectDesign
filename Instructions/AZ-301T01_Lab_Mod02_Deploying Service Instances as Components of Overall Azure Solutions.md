@@ -48,9 +48,9 @@ lab:
 
 1. 在 **新建** 边栏选项卡的顶部，在 **搜索市场** 文本框中输入 **模板部署** 并按 **Enter 键**。
 
-1. 在 **全部** 边栏选项卡上，在搜索结果中，单击 **模板部署**。
+1. 在 **“所有内容”** 边栏选项卡的搜索结果中，单击 **“模板部署(使用自定义模板部署)”**。
 
-1. 在 **模板部署** 边栏选项卡上，单击 **创建** 按钮。
+1. 在 **“模板部署(使用自定义模板部署)”** 边栏选项卡中，单击 **“创建”** 按钮。
 
 1. 在 **自定义部署** 边栏选项卡上，单击 **在编辑器中构建自己的模板** 链接。
 
@@ -58,7 +58,7 @@ lab:
 
 1. 在 **选择需要上传的文件** 对话框中，导航到 **\\allfiles\\AZ-301T01\\Module_02\\LabFiles\\Starter\\** 文件夹，选择 **cognitive-template.json** 文件，然后单击 **打开**。这样就可以将以下内容加载到模板编辑器窗格中：
 
-    ```json
+```json
     {
         "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
         "contentVersion": "1.0.0.0",
@@ -89,7 +89,7 @@ lab:
             }
         }
     }
-    ```
+```
 
 1. 单击 **保存** 按钮保存模板。
 
@@ -115,9 +115,9 @@ lab:
 
 1. 在“部署”边栏选项卡上，单击最新部署的名称。
 
-1. 在 **Microsoft.Template-概述** 边栏选项卡上，单击 **输出**。 
+1. 在 **“Microsoft.Template-概述”** 边栏选项卡上，单击 **“输出”**。 
 
-1. 在 **Microsoft.Template  - 输出** 边栏选项卡上，确定 **COGNITIVEENDPOINTURL** 和 **COGNITIVEENDPOINTKEY** 输出值。将这些值记录下来，稍后在实验室中使用。
+1. 在 **“Microsoft.Template - 输出”** 边栏选项卡上，识别 **“cognitiveEndpointUrl”** 和 **“cognitiveEndpointKey”** 输出的值。将这些值记录下来，稍后在实验中使用。
 
 #### 任务 3：部署功能应用程序
 
@@ -141,13 +141,13 @@ lab:
 
     - 在 **主机计划** 下拉列表中，确保选中 **消耗计划** 条目。
 
-    - 在 **运行时栈** 下拉列表中，确保选中 **NET** 条目。 
-
     - 在 **位置** 下拉列表中，选择你在上一个任务中部署了认知服务实例的 Azure 区域。
+    
+    - 在 **“运行时堆栈”** 下拉列表中，确保选中 **“NET Core”** 条目。 
 
     - 在 **存储** 部分，确保选中 **创建新的** 选项，然后接受存储帐户名称的默认值。 
 
-    - 在 **Application Insights** 部分，将扩展名设置为 **禁用**。
+    - 在 **“Application Insights”** 部分，将选项设置为 **“禁用”**。
 
     - 单击 **创建** 按钮。
 
@@ -161,39 +161,39 @@ lab:
 
 1. 在“功能应用程序”边栏选项卡上，单击边栏选项卡顶部的 **平台功能** 选项卡。
 
-1. 在 **平台功能** 选项卡上，单击 **常规设置** 部分的 **配置** 链接。
+1. 在 **“平台功能”** 选项卡上，单击 **“常规设置”** 部分的 **“配置”** 链接。
 
-1. 在 **应用程序设置** 选项卡上，找到 **应用程序设置** 部分。单击 **添加新的设置** 链接并执行以下任务：
+1. 在 **“应用程序设置”** 选项卡上，找到 **“应用程序设置”** 部分。单击 **“+ 新建应用程序设置”** 链接并执行以下任务：
 
-    - 在 **输入名称** 文本框中输入 **EndpointUrl**。
+    - 在 **“名称”** 文本框中，输入 **“EndpointUrl”**。
 
-    - 在 **输入值** 文本框中，输入你先前确定的值 **COGNITIVEENDPOINTURL**。
+    - 在 **“值”** 文本框中，输入先前识别的 **“cognitiveEndpointUrl”** 的值，然后输入 **“text/analytics/v2.0”**。
 
 1. 在 **应用程序设置** 部分，再次单击 **添加新的设置** 并执行以下任务：
 
     - 在 **输入名称** 文本框中输入 **EndpointKey**。
 
-    - 在 **输入值** 文本框中，输入你先前确定的值 **COGNITIVEENDPOINTKEY**。
+    - 在 **“输入值”** 文本框中，输入你先前识别的 **“cognitiveEndpointKey”** 的值。
 
 1. 单击 **应用程序设置** 选项卡顶部的 **保存** 按钮。
 
-1. 返回“功能应用程序”边栏选项卡，单击边栏选项卡顶部的 **平台功能** 选项卡。
+1. 导航回到 **“函数应用”** 边栏选项卡，然后在 **“平台功能”** 选项卡中，单击 **“代码部署”** 部分的 **“部署中心”** 链接。
 
-1. 在 **平台功能** 选项卡中，单击 **代码部署** 部分的 **部署中心** 链接。
+1. 在出现的 **“部署中心”** 边栏选项卡上，单击 **“外部”**，然后单击 **“继续”**。
 
-1. 在出现的 **部署中心** 边栏选项卡上，单击 **外部** 按钮，然后单击 **继续**。
-
-1. 单击 **应用程序服务构建服务器** 并单击 **继续**。 
+1. 单击 **“应用服务生成服务”** 并单击 **“继续”**。 
 
 1. 显示 **代码** 部分后，执行以下任务
 
-    - 在 **存储库 URL** 文本框中输入 **https://github.com/azure-labs/cognitive-services-function**。
+    - 在 **“存储库”** 文本框中键入 **“https://github.com/azure-labs/cognitive-services-function”**。
 
     - 在 **分支** 文本框中输入 **master**。
     
         **注意**：分支字段需区分大小写。
 
-    - 在 **存储库类型** 部分，确保选中 **Git** 选项。
+    - 将 **“存储库类型”** 的值设置为 **“Git”**。
+    
+    - 将 **“专用存储库”** 的值设置为 **“否”**。
 
     - 单击 **继续** 按钮。
 
@@ -215,11 +215,11 @@ lab:
 
     - 在 **请求正文** 文本框中输入以下内容：
 
-    ```json
+```json
     {
         "text": "I stuffed a shirt or two into my old carpet-bag, tucked it under my arm, and started for Cape Horn and the Pacific."
     }
-    ```
+```
 
     - 单击 **运行** 按钮。
 
@@ -270,7 +270,7 @@ lab:
 
 1. 在 **逻辑应用程序设计器** 边栏选项卡上，查看空白的逻辑应用程序 JSON 模板：
 
-    ```json
+```json
     {
         "definition": {
             "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
@@ -281,11 +281,11 @@ lab:
             "triggers": {}
         }
     }
-    ```
+```
 
-1. 使用包含 HTTP 触发器的以下模板替换默认 JSON 模板 (**\\allfiles\\AZ-301T01\\Module_01\\LabFiles\\Starter\\logic-app.json**)：
+1. 使用包含 HTTP 触发器的以下模板替换默认 JSON 模板 (****\\allfiles\\AZ-301T01\\Module_02\\LabFiles\\Starter\\logic-app.json**)：
 
-    ```json
+```json
     {
         "definition": {
             "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
@@ -312,7 +312,7 @@ lab:
             }
         }
     }
-    ```
+```
 
 1. 在 **逻辑应用程序设计器** 边栏选项卡上，单击 **设计器** 按钮。
 
@@ -408,33 +408,33 @@ lab:
 
 1. 在门户底部的 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，打开交互式 **python** 终端：
 
-    ```
+```
     python
-    ```
+```
 
 1. 在门户底部的 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，导入 **请求** 库：
 
-    ```python
+```python
     import requests
-    ```
+```
 
 1. 在门户底部的 **Cloud Shell** 命令提示符处，输入以下命令（将占位符`<logic app POST Url>`替换为本实验室中先前记录的url值）并按 **Enter 键**，创建一个包含你逻辑应用程序 url 值的变量：
 
-    ```python
+```python
     url = "<logic app POST Url>"
-    ```
+```
 
 1. 在门户底部的 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，发送 HTTP POST 请求以触发逻辑应用程序工作流程：
 
-    ```python
+```python
     response = requests.post(url, json={'text': 'Circumambulate the city of a dreamy Sabbath afternoon.Go from Corlears Hook to Coenties Slip, and from thence, by Whitehall, northward.'})
-    ```
+```
 
 1. 在门户底部的 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter 键**，显示逻辑应用程序工作流程的输出结果：
 
-    ```python
+```python
     print(response.status_code, response.reason, response.text)
-    ```
+```
 
 1.  关闭 **Cloud Shell** 窗格。
 
@@ -448,9 +448,9 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，列出你在本实验室中创建的所有资源组：
 
-    ```
+```
     az group list --query "[?starts_with(name,'AADesignLab10')]".name --output tsv
-    ```
+```
 
 1. 验证输出结果中是否仅包含你在本实验室中创建的资源组。这些组将在下一个任务中删除。
 
@@ -458,9 +458,9 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，删除你在本实验室中创建的资源组
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab10')]".name --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'
-    ```
+```
 
 1. 关闭门户底部的 **Cloud Shell** 提示。
 

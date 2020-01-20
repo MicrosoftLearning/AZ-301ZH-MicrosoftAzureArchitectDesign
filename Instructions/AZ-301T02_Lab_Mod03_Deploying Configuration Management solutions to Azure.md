@@ -76,7 +76,7 @@ lab:
 
 1. 在 **打开** 对话框中，导航至 **\\allfiles\\AZ-301T02\\Module_03\\LabFiles\\Starter\\** 文件夹，选择 **linux-template.json** 文件，然后单击 **打开**。该文件包含以下模板：
 
-    ```json
+```json
     {
         "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
         "contentVersion": "1.0.0.0",
@@ -193,31 +193,31 @@ lab:
             }
         ]
     }
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符，键入以下命令并按 **Enter 键** 创建一个变量，该变量的值指定将包含 hub 虚拟网络的资源组的名称：
 
-    ```sh
+```sh
     RESOURCE_GROUP='AADesignLab1202-RG'
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符，键入以下命令并按 **Enter 键** 创建一个变量，该值指定将用于部署的 Azure 区域（将占位符`<Azure region>`替换为你希望在本实验中部署资源的 Azure 区域的名称）：
 
-    ```sh
+```sh
     LOCATION='<Azure region>'
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符，键入以下命令并按 **Enter 键** 创建新资源组：
 
-    ```sh
+```sh
     az group create --name $RESOURCE_GROUP --location $LOCATION
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符，键入以下命令并按 **Enter 键** 使用指定的参数文件部署 Azure 资源管理器模板：
 
-    ```sh
+```sh
     az group deployment create --resource-group $RESOURCE_GROUP --template-file ~/linux-template.json --parameters password=Pa55w.rd1234
-    ```
+```
 
 1. 在继续执行下一个任务之前，无需等待部署完成。
 
@@ -290,7 +290,7 @@ lab:
 
     - 在 **配置文件** 字段旁，单击带有文件夹图标的蓝色按钮。
 
-    - 在 **选择要上载的文件** 对话框中，导航至 **\\allfiles\\AZ-301T02\\Module_02\\LabFiles\\Starter\\** 文件夹。
+    - 在 **“选择要上传的文件”** 对话框中，导航至 **\\allfiles\\AZ-301T02\\Module_03\\LabFiles\\Starter\\** 文件夹。
 
     - 选择 **lampserver.ps1** 文件。
 
@@ -357,9 +357,9 @@ lab:
 
 1. 在门户网站底部的 **Cloud Shell** 命令提示符下，键入以下命令并按 **Enter 键** 列出你在本实验中创建的所有资源组：
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab12')]".name --output tsv
-    ```
+```
 
 1. 验证输出是否仅包含你在本实验中创建的资源组。这些组将在下一个任务中删除。
 
@@ -367,9 +367,9 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符下，键入以下命令并按 **Enter 键** 删除你在本实验中创建的资源组
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab12')]".name --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'
-    ```
+```
 
 1. 关闭在门户网站的底部的 **Cloud Shell** 提示。
 

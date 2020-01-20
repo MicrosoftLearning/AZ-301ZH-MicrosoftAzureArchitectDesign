@@ -124,39 +124,39 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，创建一个变量，其值用于指定包含你先前在本练习中部署的 Azure 密钥保管库的资源组的名称：
 
-    ```sh
+```sh
     RESOURCE_GROUP='AADesignLab0901-RG'
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，检索你先前在本练习中创建的 Azure 密钥保管库的名称：
 
-    ```sh
+```sh
     KEY_VAULT_NAME=$(az keyvault list --resource-group $RESOURCE_GROUP --query "[0].name" --output tsv)
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，列出密钥保险库中的秘密：
 
-    ```sh
-    az keyvault secret list --vault-name $KEY_VAULT_NAME
-    ```
+```sh
+    az keyvault secret list --vault-name $KEY_VAULT_NAME --output json
+```
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，显示 **thirdPartyKey** 机密的值：
 
-    ```sh
+```sh
     az keyvault secret show --vault-name $KEY_VAULT_NAME --name thirdPartyKey --query value --output tsv
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，向密钥保管库添加新的机密：
 
-    ```sh
+```sh
     az keyvault secret set --vault-name $KEY_VAULT_NAME --name firstPartyKey --value 56f8a55119845511c81de488
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，列出密钥保管库中的机密：
 
-    ```sh
+```sh
     az keyvault secret list --vault-name $KEY_VAULT_NAME --query "[*].{Id:id,Created:attributes.created}" --out table
-    ```
+```
 
 1. 关闭 **Cloud Shell** 窗格。
 
@@ -176,7 +176,7 @@ lab:
 
 1. 在 **选择需要上传的文件** 对话框中，导航到 **\\allfiles\\AZ-301T01\\Module_01\\LabFiles\\Starter\\** 文件夹，选择 **secret-template.json** 文件，然后单击 **打开**。这样就可以将以下内容加载到模板编辑器窗格中：
 
-    ```json
+```json
     {
         "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
         "contentVersion": "1.0.0.0",
@@ -200,7 +200,7 @@ lab:
             }
         ]
     }
-    ```
+```
 
 1. 单击 **保存** 按钮保存模板。
 
@@ -232,7 +232,7 @@ lab:
 
 1. 在 **选择需要上传的文件** 对话框中，导航到 **\\allfiles\\AZ-301T01\\Module_01\\LabFiles\\Starter\\** 文件夹，选择 **storage-template.json** 文件，然后单击 **打开**。这样就可以将以下内容加载到模板编辑器窗格中：
 
-    ```json
+```json
     {
         "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
         "contentVersion": "1.0.0.0",
@@ -259,7 +259,7 @@ lab:
                 }
             },
             {
-                "apiVersion": "2016/10/1",
+                "apiVersion": "2016-10-01",
                 "type": "Microsoft.KeyVault/vaults/secrets",
                 "name": "[concat(parameters('vaultName'), '/', variables('secretName'))]",
                 "dependsOn": [
@@ -272,7 +272,7 @@ lab:
             }
         ]
     }
-    ```
+```
 
 1. 单击 **保存** 按钮保存模板。
 
@@ -321,21 +321,21 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，创建一个变量，其值用于指定将包含中心虚拟网络的资源组的名称：
 
-    ```
+```
     RESOURCE_GROUP='AADesignLab0901-RG'
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，检索你先前在本练习中创建的 Azure 密钥保管库的资源 ID：
 
-    ```sh
+```sh
     KEY_VAULT_ID=$(az keyvault list --resource-group $RESOURCE_GROUP --query "[0].id" --output tsv)
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，创建一个变量，其值用于指定 Azure 密钥保管库资源 ID 的名称，其中考虑了资源 ID 可能包含的任何特殊字符：
 
-    ```sh
+```sh
     KEY_VAULT_ID_REGEX="$(echo $KEY_VAULT_ID | sed -e 's/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g')"
-    ```
+```
 
 #### 任务 2：准备 Azure 资源管理器部署模板和参数文件
 
@@ -349,15 +349,15 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，使用 **$KEY_VAULT_ID** 变量的值替换 **vm-template.parameters.json** 参数文件中 **$KEY_VAULT_ID** 参数占位符：
 
-    ```sh
+```sh
     sed -i.bak1 's/"$KEY_VAULT_ID"/"'"$KEY_VAULT_ID_REGEX"'"/' ~/vm-template.parameters.json
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，验证参数文件中的占位符是否替换成功：
 
-    ```sh
+```sh
     cat ~/vm-template.parameters.json
-    ```
+```
 
 #### 任务 3：配置密钥保管库以部署 Azure 资源管理器模板
 
@@ -369,9 +369,7 @@ lab:
 
 1. 在“密钥保管库”边栏选项卡上，单击 **访问策略**。
 
-1. 在 **访问策略** 边栏选项卡上，单击 **单击显示高级访问策略** 链接。
-
-1. 选择 **启用对 Azure 资源管理器的访问以进行模板部署** 复选框。
+1. 在 **“访问策略”** 边栏选项卡的 **“启用对以下项的访问:”** 区域下方，选择 **“用于部署模板的 Azure 资源管理器”** 复选框。
 
 1. 单击窗格顶部的 **保存** 按钮。
 
@@ -379,9 +377,9 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，使用指定参数文件部署 Azure 资源管理器模板：
 
-    ```sh
+```sh
     az group deployment create --resource-group $RESOURCE_GROUP --template-file ~/vm-template.json --parameters @~/vm-template.parameters.json
-    ```
+```
 
 1. 请等待部署完成，再执行下一个任务。
 
@@ -389,33 +387,33 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，创建一个变量，其值用于指定包含新部署的 Azure VM 的资源组的名称：
 
-    ```
+```
     RESOURCE_GROUP='AADesignLab0901-RG'
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，检索包含存储本地管理员帐户密码值的密码的 Azure 密钥保管库的名称：
 
-    ```sh
+```sh
     KEY_VAULT_NAME=$(az keyvault list --resource-group $RESOURCE_GROUP --query "[0].name" --output tsv)
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，检索机密的值：
 
-    ```sh
+```sh
     az keyvault secret show --vault-name $KEY_VAULT_NAME --name vmPassword --query value --output tsv
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，检索你在上一个任务中部署的 Azure VM 的公共 IP 地址：
 
-    ```sh
+```sh
     PUBLIC_IP=$(az network public-ip list --resource-group $RESOURCE_GROUP --query "[0].ipAddress" --output tsv)
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，通过 SSH 连接到 Azure VM：
 
-    ```sh
+```sh
     ssh Student@$PUBLIC_IP
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符处，当系统提示你是否要继续连接时，输入`yes`并按 **Enter 键**。
 
@@ -435,9 +433,9 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，列出你在本实验室中创建的所有资源组：
 
-    ```
+```
     az group list --query "[?starts_with(name,'AADesignLab09')]".name --output tsv
-    ```
+```
 
 1. 验证输出结果中是否仅包含你在本实验室中创建的资源组。这些组将在下一个任务中删除。
 
@@ -445,9 +443,9 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令，然后按 **Enter 键**，删除你在本实验室中创建的资源组
 
-    ```sh
+```sh
     az group list --query "[?starts_with(name,'AADesignLab09')]".name --output tsv | xargs -L1 bash -c 'az group delete --name $0 --no-wait --yes'
-    ```
+```
 
 1. 关闭门户底部的 **Cloud Shell** 提示。
 

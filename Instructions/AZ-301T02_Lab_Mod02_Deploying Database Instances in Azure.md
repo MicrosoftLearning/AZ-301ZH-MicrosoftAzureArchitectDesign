@@ -71,6 +71,10 @@ lab:
 1. 在执行下一步之前，请等待配置完成。
 
     > **注意**：部署时间应少于 5 分钟。
+    
+1. 导航到新创建的 Cosmos DB 帐户的边栏选项卡，然后单击 **“密钥”**。
+
+1. 在 Cosmos DB 帐户 **“密钥”** 边栏选项卡中，记下 **“主连接字符串”** 的值。在本实验的第三个练习中，你将需要这个。
 
 1. 单击门户顶部的 **Cloud Shell** 图标，打开新的 Shell 实例。
 
@@ -98,54 +102,53 @@ lab:
 
 1. 在 **Cloud Shell** 命令提示符键入以下命令并按 **Enter** 键创建一个变量，该值指定包含你在此任务中先前部署的 Azure Cosmos DB 帐户资源组名称：
 
-    ```
+```
     RESOURCE_GROUP='AADesignLab0701-RG'
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符键入以下命令并按 **Enter** 键创建一个变量，该值指定包含你在此任务中先前创建的 CosmosDB 帐户名称：
 
-    ```sh
+```sh
     COSMOSDB_NAME=$(az cosmosdb list --resource-group $RESOURCE_GROUP --query "[0].name" --output tsv)
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符键入以下命令并按 **Enter** 键创建一个变量，该值指定包含你在此任务中先前创建的 CosmosDB 帐户主键：
 
-    ```sh
-    PRIMARY_KEY=$(az cosmosdb list-keys --resource-group $RESOURCE_GROUP --name $COSMOSDB_NAME | jq -r '.primaryMasterKey')
-    ```
+```sh
+    PRIMARY_KEY=$(az cosmosdb keys list --resource-group $RESOURCE_GROUP --name $COSMOSDB_NAME --output json | jq -r '.primaryMasterKey')
+```
 
 1. 在 **Cloud Shell** 命令提示符键入以下命令并按 **Enter** 键创建一个变量，该值指定包含你在此任务中先前创建的 CosmosDB 帐户 URI：
 
-    ```sh
+```sh
     URI="https://$COSMOSDB_NAME.documents.azure.com:443/"
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符键入以下命令并按 **Enter** 键，以创建一个名为 **FinancialClubDatabase** 的新 CosmosDB 数据库：
 
-    ```sh
+```sh
     az cosmosdb database create --url-connection $URI --key $PRIMARY_KEY --db-name 'FinancialClubDatabase'
-    ```
+```
     
 1. 在 **Cloud Shell** 命令提示符，键入以下命令并按 **Enter 键** 在新创建的数据库中创建一个名为 **MemberCollection** 的固定数据库集：
 
-    ```sh
+```sh
     az cosmosdb collection create --url-connection $URI --key $PRIMARY_KEY --db-name 'FinancialClubDatabase' --collection-name 'MemberCollection' --throughput 400
-    ```
+```
 
 1. 在 **Cloud Shell** 命令提示符键入以下命令并按 **Enter** 键，以显示 PRIMARY_KEY 变量值：
 
-    ```sh
+```sh
     echo $PRIMARY_KEY
-    ```
+```
     
 1. 在 **Cloud Shell** 命令提示符键入以下命令并按 **Enter** 键，以显示 URI 变量值：
 
-    ```sh
+```sh
     echo $URI
-    ```
+```
 
-    > **注意**：记下这些值 - 将在下一个练习中用到它们。 
-
+    > **注意**：记下这些值，你将在本实验的第三个练习中用到它们。
 
 #### 任务 3：在 Cosmos DB 中创建和查询文档
 
@@ -157,9 +160,9 @@ lab:
 
 1. 在打开的 **查询 1** 选项卡中，查看默认查询：
 
-    ```sql
+```sql
     SELECT * FROM c
-    ```
+```
 
 1. 单击查询编辑器顶部的 **执行查询** 按钮。
 
@@ -171,7 +174,7 @@ lab:
 
 1. 在 **项目** 选项卡中，用以下文档替换现有文档：
 
-    ```json
+```json
     {
         "firstName": "Pennington",
         "lastName": "Oneal",
@@ -180,7 +183,7 @@ lab:
         "company": "Veraq",
         "isVested": false
     }
-    ```
+```
 
 1. 单击 **保存** 按钮，位于 **项目** 标签顶部。
 
@@ -188,13 +191,13 @@ lab:
 
 1. 在 **项目** 选项卡中，用以下文档替换现有文档：
 
-    ```json
+```json
     {
         "firstName": "Suzanne",
         "lastName": "Oneal",
         "company": "Veraq"
     }
-    ```
+```
 
 1. 单击 **保存** 按钮，位于 **项目** 标签顶部。
 
@@ -202,7 +205,7 @@ lab:
 
 1. 在查询编辑器中，使用以下查询替换默认查询：
 
-    ```sql
+```sql
     SELECT 
         c.id, 
         c.firstName, 
@@ -213,13 +216,13 @@ lab:
         c
     WHERE
         IS_DEFINED(c.isVested)
-    ```
+```
 
 1. 单击查询编辑器顶部的 **执行查询** 按钮并查看结果。
 
 1. 在查询编辑器中，使用以下查询替换现有查询：
 
-    ```sql
+```sql
     SELECT 
         c.id, 
         c.firstName, 
@@ -229,30 +232,30 @@ lab:
         c
     WHERE
         c.age > 20
-    ```
+```
 
 1. 单击查询编辑器顶部的 **执行查询** 按钮并查看结果。
 
 1. 在查询编辑器中，使用以下查询替换现有查询：
 
-    ```sql
+```sql
     SELECT VALUE 
         c.id 
     FROM
         c
-    ```
+```
 
 1. 单击查询编辑器顶部的 **执行查询** 按钮并查看结果。
 
 1. 在查询编辑器中，使用以下查询替换现有查询：
 
-    ```sql
+```sql
     SELECT VALUE { 
         "badgeNumber": SUBSTRING(c.id, 0, 8),
         "company": c.company,
         "fullName": CONCAT(c.firstName, " ", c.lastName)
     } FROM c
-    ```
+```
 
 1. 单击查询编辑器顶部的 **执行查询** 按钮并查看结果。
 
@@ -332,11 +335,11 @@ lab:
 
 1. 在 **参数** 部分的 **选项** 参数的 **值** 字段中，粘贴以下 JSON 内容：
 
-    ```json
+```json
     {
         "quantity": 50
     }
-    ```
+```
 
 1. 在 **响应消息** 部分，单击 **试试看！** 按钮。
 
@@ -351,7 +354,6 @@ lab:
 1. 关闭新的浏览器选项卡并返回显示 Azure 门户的浏览器选项卡。
 
 > **回顾**：在本练习中，你创建了一个新的 API 应用，使用 .NET Core DocumentDB SDK 连接至 Azure Cosmos DB 集合，并管理其文档。
-
 
 ## 练习 3：将 Cosmos DB 连接至 Azure 搜索
 
@@ -375,11 +377,11 @@ lab:
 
     - 在 **位置** 下拉列表中，选择匹配 Azure 区域或靠近之前在此实验中所部署的 Cosmos DB 资源。
 
-    - 单击**定价层**。
+    - 单击 **“更改定价层”**。
 
-    - 在 **选择你的定价层** 边栏选项卡，单击 **免费**，然后单击 **选择** 按钮。
+    - 在 **“选择定价层”** 边栏选项卡，单击 **“免费”**，然后单击 **“选择”** 按钮。
 
-    - 单击 **创建** 按钮。
+    - 单击 **“查看 + 创建”** 按钮，查看设置，然后单击 **“创建”**。
 
 1. 在执行下一步之前，请等待配置完成。
 
@@ -400,17 +402,17 @@ lab:
 
 1. 在 **资源组** 边栏选项卡中，单击 **AADesignLab0701-RG**。
 
-1. 在 **AADesignLab0701-RG** 边栏选项卡上，单击表示你先前在本实验中创建的 Azure Cosmos DB 帐户的条目。
+1. 在 **“AADesignLab0701-RG”** 边栏选项卡上，单击表示你先前在本实验中创建的 Azure 搜索实例的条目。
 
-1. 在 Azure Cosmos DB 帐户边栏选项卡上，单击 **添加 Azure 搜索**。
-
-1. 在“选择搜索服务”选项卡上，选择先前创建的 Azure 搜索服务，然后单击 **下一个：连接到你的数据**。
+1. 在 Azure 搜索服务的 **“概述”** 边栏选项卡上，单击 **“导入数据”**，然后单击 **“下一步”**：**连接到你的数据**。
 
 1. 在 **连接到你的数据** 选项卡中，执行以下任务：
 
+    - 在 **“数据源”** 下拉列表中，选择 **“Cosmos DB”**。
+
     - 在 **名称** 文本框中，键入 **cosmosdata**。
 
-    - 在 **Cosmos DB 帐户** 文本框中，接受默认条目。
+    - 在 **“Cosmos DB 帐户”** 文本框中，键入你之前在本实验中识别的 Cosmos DB 帐户连接字符串。
 
     - 在 **数据库** 下拉列表中选择 **FinancialClubDatabase** 条目。
 
@@ -471,7 +473,7 @@ lab:
 
     - 在 **开始时间 (UTC)** 字段，指定当前日期并接受时间条目的默认值。
 
-    - 单击 **提交** 按钮。
+    - 确保删除了 **“跟踪删除”** 复选框，然后单击 **“提交”** 按钮。
 
 #### 任务 3：验证 API 应用程序
 
@@ -507,9 +509,9 @@ lab:
 
 1. 在 **参数** 部分的 **查询** 参数的 **值** 文本框中，键入以下文本：
 
-    ```
+```
     Oneal
-    ```
+```
 
 1. 在 **响应消息** 部分，单击 **试试看！** 按钮。
 
@@ -517,9 +519,9 @@ lab:
 
 1. 在 **参数** 部分的 **查询** 参数的 **值** 文本框中，键入以下文本：
 
-    ```
+```
     penn*
-    ```
+```
 
 1. 在 **响应消息** 部分，单击 **试试看！** 按钮。
 
