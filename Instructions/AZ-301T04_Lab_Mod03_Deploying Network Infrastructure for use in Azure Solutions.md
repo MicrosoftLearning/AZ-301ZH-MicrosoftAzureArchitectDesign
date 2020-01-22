@@ -1,4 +1,4 @@
----
+﻿---
 lab:
     title: '部署 Azure 解决方案中使用的网络基础架构'
     module: '模块 3：联网 Azure 应用程序组件'
@@ -113,11 +113,11 @@ lab:
     > **注**: 你需要重新启动 Cloud Shell 才能使安装的构建块 npm 包生效。
 
 
-#### 任务 3: 准备构建块 Hub 和 Spoke 参数文件
+#### 任务 4: 准备构建块 Hub 和 Spoke 参数文件
 
 1. 在 **Cloud Shell** 窗格，单击 **上传/下载文件** 图标，然后在下拉菜单中单击 **上传**。 
 
-2. 在 **打开** 对话框中，导航到 **\\allfiles\\AZ-301T04\\Module_03\\LabFiles\\Starter\\** 文件夹，选择文件 **hub-nva.json**、**hub-vnet.json**、**hub-vnet-peering.json**、**spoke1.json** 和 **spoke2.json** 并单击 **打开**。 
+2. 在 **打开** 对话框中，导航到 **\\allfiles\\AZ-301T04\\Module_03\\LabFiles\\Starter\\** 文件夹，选择 **hub-nva.json**，并单击 **打开**。重复相同的步骤，上传文件 **hub-vnet.json**、**hub-vnet-peering.json**、**spoke1.json** 和 **spoke2.json**。
 
 3. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，将 **adminUsername** 参数的占位符替换为构建块参数文件 **hub-vnet.json** 中的值 **Student**：
 
@@ -191,12 +191,12 @@ lab:
     cat ~/spoke2.json
     ```
 
-#### 任务 4: 实现 Hub 和 Spoke 设计的主组件
+#### 任务 5: 实现 Hub 和 Spoke 设计的主组件
 
 1. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，创建一个变量，其值用于指定 Azure 订阅的名称：
 
     ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
     ```
 
 2. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，创建一个变量，其值用于指定将包含主虚拟网络的资源组的名称：
@@ -210,17 +210,23 @@ lab:
     ```sh
     LOCATION='<Azure region>'
     ```
+4.  在 **Cloud Shell** 命令提示符下，键入以下命令并按 **Enter**，创建用于部署的资源组
 
-4. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，使用 Azure 构建块部署 Hub-and-Spoke 拓扑的主组件：
+    ```sh
+    az group create --name $RESOURCE_GROUP_HUB_VNET --location $LOCATION
+    ```
+
+
+5. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，使用 Azure 构建块部署 Hub-and-Spoke 拓扑的主组件：
 
     ```sh
     azbb -g $RESOURCE_GROUP_HUB_VNET -s $SUBSCRIPTION_ID -l $LOCATION -p ~/hub-vnet.json --deploy
     ```
 
-5. 继续下一个任务，无需等待部署完成。
+6. 继续下一个任务，无需等待部署完成。
 
 
-#### 任务 5: 实现 Hub 和 Spoke 设计的辐组件
+#### 任务 6: 实现 Hub 和 Spoke 设计的辐组件
 
 1. 单击在任务栏中的 **Microsoft Edge** 图标。
 
@@ -233,7 +239,7 @@ lab:
 5. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，创建一个变量，其值用于指定 Azure 订阅的名称：
 
     ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
     ```
 
 6. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，创建一个变量，其值用于指定将包含第一个辐虚拟网络的资源组的名称：
@@ -246,6 +252,11 @@ lab:
 
     ```sh
     LOCATION=$(az group list --query "[?name == 'AADesignLab08-hub-vnet-rg'].location" --output tsv)
+    ```
+1. 在 **Cloud Shell** 命令提示符下，键入以下命令并按 **Enter**，创建用于部署的资源组:
+
+    ```sh
+    az group create --name $RESOURCE_GROUP_SPOKE1_VNET --location $LOCATION
     ```
 
 8. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，使用 Azure 构建块部署 Hub-and-Spoke 拓扑的第一个辐组件：
@@ -267,7 +278,7 @@ lab:
 14. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，创建一个变量，其值用于指定 Azure 订阅的名称：
 
     ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
     ```
 
 15. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，创建一个变量，其值用于指定将包含第二个辐虚拟网络的资源组的名称：
@@ -281,16 +292,21 @@ lab:
     ```sh
     LOCATION=$(az group list --query "[?name == 'AADesignLab08-hub-vnet-rg'].location" --output tsv)
     ```
+17. 在 **Cloud Shell** 命令提示符下，键入以下命令并按 **Enter**，创建用于部署的资源组:
 
-17. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，使用 Azure 构建块部署 Hub-and-Spoke 拓扑的第二个辐组件：
+    ```sh
+    az group create --name $RESOURCE_GROUP_SPOKE2_VNET --location $LOCATION
+    ```
+
+18. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，使用 Azure 构建块部署 Hub-and-Spoke 拓扑的第二个辐组件：
 
     ```sh
     azbb -g $RESOURCE_GROUP_SPOKE2_VNET -s $SUBSCRIPTION_ID -l $LOCATION -p ~/spoke2.json --deploy
     ```
 
-18. 继续下一个任务，无需等待部署完成。
+19. 继续下一个任务，无需等待部署完成。
 
-#### 任务 6: 配置 Hub 和 Spoke 设计的VNet 对等互连
+#### 任务 7: 配置 Hub 和 Spoke 设计的VNet 对等互连
 
 1. 单击在任务栏中的 **Microsoft Edge** 图标。
 
@@ -303,7 +319,7 @@ lab:
 5. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，创建一个变量，其值用于指定 Azure 订阅的名称：
 
     ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
     ```
 
 6. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，创建一个变量，其值用于指定包含主虚拟网络的资源组的名称：
@@ -327,7 +343,7 @@ lab:
 9. 继续下一个任务，无需等待部署完成。
 
 
-#### 任务 7: 配置 Hub 和 Spoke 设计的路由
+#### 任务 8: 配置 Hub 和 Spoke 设计的路由
 
 1. 单击在任务栏中的 **Microsoft Edge** 图标。
 
@@ -340,7 +356,7 @@ lab:
 5. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，创建一个变量，其值用于指定 Azure 订阅的名称：
 
     ```sh
-    SUBSCRIPTION_ID=$(az account list --query "[0].id" | tr -d '"')
+    SUBSCRIPTION_ID=$(az account list --query "[0].id" --output tsv | tr -d '"')
     ```
 
 6. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，创建一个变量，其值用于指定将包含主网络虚拟设备 (NVA) 的资源组的名称：
@@ -354,14 +370,19 @@ lab:
     ```sh
     LOCATION=$(az group list --query "[?name == 'AADesignLab08-hub-vnet-rg'].location" --output tsv)
     ```
+8. 在 **Cloud Shell** 命令提示符下，键入以下命令，创建将在部署中使用的资源组.
 
-8. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，使用 Azure 构建块部署 Hub-and-Spoke 拓扑的 NVA 组件：
+    ```sh
+    az group create --name $RESOURCE_GROUP_HUB_NVA --location $LOCATION
+    ```
+    
+9. 在 **Cloud Shell** 命令提示符处，输入以下命令并按 **Enter** 键，使用 Azure 构建块部署 Hub-and-Spoke 拓扑的 NVA 组件：
 
     ```sh
     azbb -g $RESOURCE_GROUP_HUB_NVA -s $SUBSCRIPTION_ID -l $LOCATION -p ~/hub-nva.json --deploy
     ```
 
-9. 请等待部署完成，再执行下一个任务。
+10. 请等待部署完成，再执行下一个任务。
 
     > **注**: 部署可能需要大约 10 分钟。
 
@@ -426,13 +447,11 @@ lab:
 
     - 在 **虚拟机** 下拉列表中，保留默认条目。
 
-    - 将 **端口** 文本框留空。 
-
     - 确保 **目的地** 选项设置为 **手动指定**。
 
     - 在 **URI、FQDN 或 IPv4** 文本框中，输入 **10.2.0.68** 条目。
 
-    - 在 **端口** 文本框中，输入 3389。
+    - 在 **目标端口** 文本框中，输入 3389。
 
     - 单击“检查”按钮。
 

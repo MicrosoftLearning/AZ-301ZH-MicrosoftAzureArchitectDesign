@@ -526,7 +526,7 @@ lab:
     LOCATION=$(az group list --query "[?name == 'AADesignLab0301-RG'].location" --output tsv)
 ```
 
-6. 在 **Cloud Shell** 命令提示符中，输入以下命令并按 **Enter** 以创建用于部署的资源组：
+6. 在 **Cloud Shell** 命令提示符下，键入以下命令并按 **Enter**，创建将用于部署的资源组：
 ```sh
     az group create --name $RESOURCE_GROUP --location $LOCATION
 ```
