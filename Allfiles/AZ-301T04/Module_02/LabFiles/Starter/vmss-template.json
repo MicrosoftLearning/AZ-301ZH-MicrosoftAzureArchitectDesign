@@ -45,7 +45,7 @@
             "overprovisionInstances": "[parameters('overprovision')]"
         },
         "vm": {
-            "size": "Standard_A1_v2",
+            "size": "Standard_D2s_v3",
             "authentication": {
                 "username": "Student",
                 "password": "StudentPa55w.rd"

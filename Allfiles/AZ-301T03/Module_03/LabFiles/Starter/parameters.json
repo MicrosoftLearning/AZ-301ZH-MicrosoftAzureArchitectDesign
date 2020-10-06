@@ -5,7 +5,7 @@
     "webAppName": {
       "value": "$WEBAPPNAME2"
     },
-    "repositoryUrl": {		
+    "repositoryUrl": {
       "value": "$REPOSITORY_URL"
     },
     "branch": {

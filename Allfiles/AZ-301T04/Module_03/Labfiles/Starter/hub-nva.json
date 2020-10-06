@@ -9,6 +9,7 @@
                     "resourceGroupName": "AADesignLab08-hub-nva-rg",
                     "settings": {
                         "vmCount": 1,
+                        "size": "Standard_D2s_v3",
                         "namePrefix": "nva",
                         "computerNamePrefix": "nva",
                         "adminUsername": "",

@@ -31,6 +31,7 @@
                     "settings": {
                         "resourceGroupName": "AADesignLab08-hub-vnet-rg",
                         "vmCount": 1,
+                        "size": "Standard_D2s_v3",
                         "namePrefix": "hubjb",
                         "computerNamePrefix": "hubjb",
                         "adminUsername": "",

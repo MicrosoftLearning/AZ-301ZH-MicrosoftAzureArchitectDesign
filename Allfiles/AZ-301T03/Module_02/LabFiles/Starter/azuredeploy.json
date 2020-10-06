@@ -42,7 +42,7 @@
     "grafanaDnsPrefix": "[concat('grafana', uniqueString(resourceGroup().id))]",
     "kubernetesDnsPrefix": "[concat('kubernetes', uniqueString(resourceGroup().id))]",
     "kubernetesClusterName": "[concat('aks', uniqueString(resourceGroup().id))]",
-    "kubernetesVersion": "1.13.5",
+    "kubernetesVersion": "1.15.11",
     "kubernetesAgentCount": 2,
     "kubernetesAgentVMSize": "Standard_DS2_v2",
     "gitRepository": "https://github.com/iainfoulds/devops-jenkins-aks",
@@ -169,7 +169,7 @@
     {
       "apiVersion": "2017-08-31",
       "type": "Microsoft.ContainerService/managedClusters",
-      "location": "eastus",
+      "location": "[variables('location')]",
       "name": "[variables('kubernetesClusterName')]",
       "properties": {
         "kubernetesVersion": "[variables('kubernetesVersion')]",

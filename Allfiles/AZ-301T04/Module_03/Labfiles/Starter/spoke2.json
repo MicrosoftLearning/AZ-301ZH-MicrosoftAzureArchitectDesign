@@ -3,7 +3,7 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "buildingBlocks": {
-            "value": [           
+            "value": [
                 {
                     "type": "VirtualNetwork",
                     "resourceGroupName": "AADesignLab08-spoke2-vnet-rg",
@@ -43,6 +43,7 @@
                     "settings": {
                         "resourceGroupName": "AADesignLab08-spoke2-vnet-rg",
                         "vmCount": 1,
+                        "size": "Standard_D2s_v3",
                         "namePrefix": "s2jb",
                         "computerNamePrefix": "s2jb",
                         "adminUsername": "",
@@ -59,7 +60,7 @@
                             }
                         ]
                     }
-                }                                     
+                }
             ]
         }
     }

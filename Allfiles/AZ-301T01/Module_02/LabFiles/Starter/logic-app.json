@@ -4,7 +4,6 @@
         "actions": {},
         "contentVersion": "1.0.0.0",
         "outputs": {},
-        "parameters": {},
         "triggers": {
             "manual": {
                 "inputs": {
@@ -22,5 +21,6 @@
                 "type": "Request"
             }
         }
-    }
+    },
+    "parameters": {}
 }

@@ -5,16 +5,16 @@
     "spClientId": {
       "value": "$APP_ID"
     },
-    "spClientSecret": {		
+    "spClientSecret": {
       "value": "$PASSWORD"
     },
     "linuxAdminUsername": {
       "value": "Student"
     },
-    "linuxAdminPassword": {		
+    "linuxAdminPassword": {
       "value": "Pa55w.rd1234"
     },
-    "linuxSSHPublicKey": {		
+    "linuxSSHPublicKey": {
       "value": "$PUBLIC_KEY_REGEX"
     }
   }

@@ -1,8 +1,8 @@
 configuration lampserver {
-    Import-DSCResource -module "nx" 
-    Node localhost { 
+    Import-DSCResource -module "nx"
+    Node localhost {
         $requiredPackages = @("httpd", "mod_ssl", "php", "php-mysql", "mariadb", "mariadb-server")
-        $enabledServices = @("httpd", "mariadb") 
+        $enabledServices = @("httpd", "mariadb")
         ForEach ($package in $requiredPackages) {
             nxPackage $Package {
                 Ensure         = "Present"

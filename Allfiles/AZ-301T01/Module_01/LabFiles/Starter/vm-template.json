@@ -15,9 +15,9 @@
         "subnetName": "Linux",
         "imageReference": {
             "publisher": "SUSE",
-            "offer": "openSUSE-Leap",
-            "sku": "15-0",
-            "version": "latest"
+            "offer": "SLES",
+            "sku": "12-sp4-gen2",
+            "version": "Latest"
         }
     },
     "resources": [
@@ -87,7 +87,7 @@
             ],
             "properties": {
                 "hardwareProfile": {
-                    "vmSize": "Standard_A1_v2"
+                    "vmSize": "Standard_D2s_v3"
                 },
                 "osProfile": {
                     "computerName": "[variables('vmName')]",
